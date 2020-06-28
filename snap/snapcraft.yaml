@@ -1,4 +1,4 @@
-name: p910nd
+name: p910nd-ogra
 base: core18
 adopt-info: p910nd
 summary: small printer daemon intended for diskless workstations
@@ -40,7 +40,7 @@ grade: stable
 confinement: strict
 
 apps:
-  p910nd:
+  p910nd-ogra:
     command: p910nd
     plugs:
       - network
