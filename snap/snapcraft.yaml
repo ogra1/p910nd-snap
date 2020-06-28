@@ -1,0 +1,74 @@
+name: p910nd
+base: core18
+adopt-info: p910nd
+summary: small printer daemon intended for diskless workstations
+description: |
+  A small printer daemon intended for diskless platforms that does not spool
+  to disk but passes the job directly to the printer. Normally a lpr daemon on
+  a spooling host connects to it with a TCP connection on port 910n
+  (where n=0, 1, or 2 for lp0, 1 and 2 respectively).
+
+  p910nd is particularly useful for diskless platforms.
+  Common Unix Printing System (CUPS) supports this protocol, it's called the
+  AppSocket protocol and has the scheme
+
+      socket://remotehost:PORT
+
+  Windows and Mac Os X (via CUPS) also supports this protocol.
+
+  You need to allow p910nd access to the usb printer by connecting the raw-usb
+  snap interface
+
+      snap connect p910nd:raw-usb
+
+  ... else the daemon will not start.
+
+  optionally you can configure the following settings though snap set commands:
+
+      snap set p910nd device="/dev/usb/lp0"
+      snap set p910nd bindaddr="9100"
+
+  additionally enabling bidirectional communication can be done with:
+
+      snap set p910nd bidirectional=true
+
+  Note: some printers tend to automatically suspend the USB bus, to prevent
+  /dev/usb/lp* from going away after a while, set usbcore.autosuspend=0 on your
+  kernel cmdline.
+
+grade: stable
+confinement: strict
+
+apps:
+  p910nd:
+    command: p910nd
+    plugs:
+      - network
+      - network-bind
+      - raw-usb
+  p910nd-daemon:
+    command: p910nd.sh
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+      - raw-usb
+
+parts:
+  p910nd:
+    source: https://github.com/kenyapcomau/p910nd.git
+    plugin: make
+    build-packages:
+      - build-essential
+      - libwrap0-dev
+    override-build: |
+      # fix an upstream Makefile bug
+      cp aux/p910nd.conf .
+      cp aux/p910nd.init .
+      # patch /run and lockfile location
+      git apply -v $SNAPCRAFT_PROJECT_DIR/snap/local/p910nd.c-patch
+      snapcraftctl build
+      cp $SNAPCRAFT_PROJECT_DIR/snap/local/p910nd.sh $SNAPCRAFT_PART_INSTALL/usr/sbin/
+      # determine current upstream version
+      VER="$(grep Version p910nd.c|head -1|sed 's/^.* //')"
+      snapcraftctl set-version "$VER"

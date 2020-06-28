@@ -1,0 +1,6 @@
+#! /bin/sh
+
+# now we can start the service
+if snapctl services ${SNAP_NAME}.p910nd-daemon | grep -q inactive; then
+  snapctl start --enable ${SNAP_NAME}.p910nd-daemon 2>&1 || true
+fi

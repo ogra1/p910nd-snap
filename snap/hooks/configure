@@ -1,0 +1,20 @@
+#! /bin/sh
+
+disable(){
+  snapctl stop --disable ${SNAP_NAME}.p910nd-daemon
+}
+
+if ! snapctl is-connected raw-usb; then
+  echo "need read/write access to /dev/usb devices !!!"
+  echo "please run 'snap connect ${SNAP_NAME}:raw-usb"
+  echo
+  echo "disabling service for the moment"
+  disable
+  exit 0
+fi
+
+if snapctl services ${SNAP_NAME}.p910nd-daemon | grep -q inactive; then
+  snapctl start --enable ${SNAP_NAME}.p910nd-daemon 2>&1 || true
+fi
+
+snapctl restart ${SNAP_NAME}.p910nd-daemon 2>&1 || true
