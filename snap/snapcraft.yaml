@@ -19,18 +19,18 @@ description: |
   You need to allow p910nd access to the usb printer by connecting the raw-usb
   snap interface
 
-      snap connect p910nd:raw-usb
+      snap connect p910nd-ogra:raw-usb
 
   ... else the daemon will not start.
 
   optionally you can configure the following settings though snap set commands:
 
-      snap set p910nd device="/dev/usb/lp0"
-      snap set p910nd bindaddr="9100"
+      snap set p910nd-ogra device="/dev/usb/lp0"
+      snap set p910nd-ogra bindaddr="9100"
 
   additionally enabling bidirectional communication can be done with:
 
-      snap set p910nd bidirectional=true
+      snap set p910nd-ogra bidirectional=true
 
   Note: some printers tend to automatically suspend the USB bus, to prevent
   /dev/usb/lp* from going away after a while, set usbcore.autosuspend=0 on your
