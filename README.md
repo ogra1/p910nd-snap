@@ -29,7 +29,7 @@
       snap set p910nd device="/dev/usb/lp0"
       snap set p910nd bindaddr="192.168.1.5"
   
-  additionally enabling bidirectional communication can be done with:
+  additionally enabling/disabling bidirectional communication can be done with:
   
       snap set p910nd bidirectional=true
   
