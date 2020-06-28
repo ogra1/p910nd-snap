@@ -26,11 +26,12 @@ description: |
   optionally you can configure the following settings though snap set commands:
 
       snap set p910nd-ogra device="/dev/usb/lp0"
-      snap set p910nd-ogra bindaddr="9100"
+      snap set p910nd-ogra bindaddr="192.168.1.5"
 
   additionally enabling bidirectional communication can be done with:
 
       snap set p910nd-ogra bidirectional=true
+      snap set p910nd-ogra bidirectional=''
 
   Note: some printers tend to automatically suspend the USB bus, to prevent
   /dev/usb/lp* from going away after a while, set usbcore.autosuspend=0 on your

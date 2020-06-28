@@ -27,7 +27,7 @@
   optionally you can configure the following settings though snap set commands:
   
       snap set p910nd device="/dev/usb/lp0"
-      snap set p910nd bindaddr="9100"
+      snap set p910nd bindaddr="192.168.1.5"
   
   additionally enabling bidirectional communication can be done with:
   
