@@ -7,12 +7,12 @@ index 2fa4454..98996e9 100644
  
  #define		BASEPORT	9100
 -#define		PIDFILE		"/var/run/p910%cd.pid"
-+#define		PIDFILE		"/var/snap/p910nd/common/p910%cd.pid"
++#define		PIDFILE		"/var/snap/p910nd-ogra/common/p910%cd.pid"
  #ifdef		LOCKFILE_DIR
  #define		LOCKFILE	LOCKFILE_DIR "/p910%cd"
  #else
 -#define		LOCKFILE	"/var/lock/subsys/p910%cd"
-+#define		LOCKFILE	"/var/snap/p910nd/common/p910%cd"
++#define		LOCKFILE	"/var/snap/p910nd-ogra/common/p910%cd"
  #endif
  #ifndef		PRINTERFILE
  #define         PRINTERFILE     "/dev/lp%c"
