@@ -71,6 +71,8 @@ parts:
     build-packages:
       - build-essential
       - libwrap0-dev
+    stage-packages:
+      - libwrap0
     override-build: |
       # fix an upstream Makefile bug
       cp aux/p910nd.conf .
