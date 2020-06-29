@@ -18,4 +18,4 @@ if [ -n "$(snapctl get bidirectional)" ]; then
 	BIDI="-b"
 fi
 
-exec p910nd -d $DEVICE $ADDR $BIDI
+exec p910nd -d $DEVICE $ADDR $BIDI 2>&1
