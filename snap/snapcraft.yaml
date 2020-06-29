@@ -79,6 +79,7 @@ parts:
       cp aux/p910nd.init .
       # patch /run and lockfile location
       git apply -v $SNAPCRAFT_PROJECT_DIR/snap/local/p910nd.c-patch
+      sed -i 's/LOG_ERR/LOG_DEBUG/' p910nd.c
       snapcraftctl build
       cp $SNAPCRAFT_PROJECT_DIR/snap/local/p910nd.sh $SNAPCRAFT_PART_INSTALL/usr/sbin/
       # determine current upstream version
