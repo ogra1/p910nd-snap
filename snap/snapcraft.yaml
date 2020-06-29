@@ -17,9 +17,10 @@ description: |
   Windows and Mac Os X (via CUPS) also supports this protocol.
 
   You need to allow p910nd access to the usb printer by connecting the raw-usb
-  snap interface
+  and network-control snap interfaces
 
       snap connect p910nd-ogra:raw-usb
+      snap connect p910nd-ogra:network-control
 
   ... else the daemon will not start.
 
@@ -52,6 +53,7 @@ apps:
     plugs:
       - network
       - network-bind
+      - network-control
       - raw-usb
   p910nd-daemon:
     command: p910nd.sh
@@ -59,6 +61,7 @@ apps:
     plugs:
       - network
       - network-bind
+      - network-control
       - raw-usb
 
 parts:
